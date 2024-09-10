@@ -13,23 +13,27 @@ def show_explore_page():
     st.title("Explore wine qualities")
     st.success("Quality of Wine")
     fig, ax = plt.subplots()
-    # number of values for each quality
-    sns.catplot(x='quality', data= wine_dataset, kind='count', ax=ax)
+    # Plot using seaborn countplot
+    sns.countplot(x='quality', data=wine_dataset, ax=ax)
     st.pyplot(fig)
 
 
     # volatile acidity vs quality
+    st.success("Volatile acidity vs Quality")
     plot = plt.figure(figsize=(5,5))
     st.bar_chart(x='quality', y='volatile acidity', data=wine_dataset)
 
 
     # citric acid vs quality
+    st.success("Citric acid vs Quality")
     plot = plt.figure(figsize=(5,5))
     st.bar_chart(x='quality', y='citric acid', data=wine_dataset)
 
-    correlation = wine_dataset.corr()
-
     # cunstructing a heat map to understand the correlation between the columns
+
+    correlation = wine_dataset.corr()
+   
+    st.success("Correlation")
     fig1, ax = plt.subplots()
     plt.figure(figsize=(10,10))
     sns.heatmap(correlation, cbar=True, square=True, fmt='.1f', annot=True, annot_kws={'size':8}, cmap='Blues', ax=ax)
